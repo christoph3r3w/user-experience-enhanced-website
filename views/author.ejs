@@ -1,0 +1,55 @@
+<%- include('./partials/head',{title:"RedPers"}) %>
+<link rel="stylesheet" href="/styles/author.css" type="text/css">
+
+</head>
+
+
+<body>
+
+<%- include('./partials/header') %>
+
+<main>
+	<div>
+		<p><%= users.id %> </p>
+		<p><%= users.name %> </p>
+		<img src="<%= users.yoast_head_json.schema["@graph"][4].image.url %>" alt="not">
+		<p><%= users.yoast_head_json.description %> </p>
+	</div>
+	<div>
+		<h3>Artikelen waaraan <%= users.name %> heeft bijgedragen</h3>
+		<p><%= users.id %> </p>
+		
+		<% for (let i = 0; i < Math.min(4, posts.length); i++) {  %>
+			<% const post = posts[i]; %>
+			<li class="latest article_wrapper">
+				
+				<a href="/posts/<%= post.id %>">
+					
+					
+					<div class="img_wrapper">
+						<img decoding="async" src="<%= post.yoast_head_json.og_image[0].url %>" width=100%>
+					</div>
+
+					<div class="article_title">
+						<h3><%- post.title.rendered %></h3>	
+					</div>
+
+					<div class="article_details">
+						<span>author</span>
+						<span>
+							<i><%-post.yoast_head_json.twitter_misc["Geschatte leestijd"]  %></i>
+						</span>
+
+						<span><%- post.date %></span>						
+					</div>
+				</a>
+				
+			</li>
+		<% } %>
+	</div>
+</main>
+
+
+
+
+<%- include('./partials/foot'); -%>

@@ -1,0 +1,128 @@
+<%- include('./partials/head',{title:"RedPers"}); -%>
+
+</head>
+
+
+<body>
+
+<%- include('./partials/header'); -%>
+
+
+<main class="homepage_posts">
+	<ul class="article_list  latest_articles">
+		<% for (let i = 0; i < 4; i++) { %>
+			<% const post = posts[i]; %>
+			<li class="latest article_wrapper">
+
+				<a href="/posts/<%= post.id %>">
+
+					<div class="img_wrapper">
+						<img decoding="async" src="<%= post.yoast_head_json.og_image[0].url %>" width="""">
+					</div>
+
+					<div class="article_title">
+						<h3><%- post.title.rendered %></h3>	
+					</div>
+
+					<div class="article_details">
+						<span>
+							<i><%-post.yoast_head_json.twitter_misc["Geschatte leestijd"] %></i>
+						</span>
+
+						<span><%- post.date %></span>						
+					</div>
+					
+					
+				</a>
+				
+			</li>
+		<% } %>
+	</ul>
+
+	<ul class="supporters-donation">
+		<li>
+			<h2>Redpers bestaat mede dankzij jou</h2>
+			<p>Red Pers biedt jonge, aspirerende journalisten een podium én begeleiding. Dat kunnen we nog beter met jouw steun.</p>
+			<a href="/">doneren</a>
+		</li>
+		<li>
+			<h3>Ook gesteund door:</h3>
+		</li>
+		<li>
+			<a href="https://www.dpgmediagroup.com/">
+				<img 
+					loading="lazy" 
+					decoding="async" 
+					width="800" 
+					height="800" 
+					src="https://redpers.nl/wp-content/uploads/2024/03/dpg-media.svg" 
+					class="attachment-large size-large wp-image-105194" 
+					alt="">								
+			</a>
+		</li>
+		<li>
+			<a href="https://www.verenigingveronica.nl/">
+				<img 
+				loading="lazy" 
+				decoding="async" 
+				width="269" 
+				height="90" 
+				src="https://redpers.nl/wp-content/uploads/2024/03/vereniging-veronica-3.svg" 
+				class="attachment-1536x1536 size-1536x1536 wp-image-105198" alt="">								
+			</a>
+		</li>
+	</ul>
+
+		
+	
+	<div class="categories">
+		<article class="editor_spick ">
+			<h2>editor_spick</h2>
+			<ul></ul>
+		</article>
+
+		<% categories.forEach((category) => { %>
+			<article id="catgoryID_<%= category.id %>">
+				<h2><%= category.name %></h2>
+				<ul class="article_list">
+					<% category.posts.forEach((post) => { %>
+						<li class="cat article_wrapper">
+								
+							<a href="/posts/<%= post.id %>">
+
+								<div class="img_wrapper">
+									<img decoding="async" width="" src="<%= post.yoast_head_json.og_image[0].url %>" >
+								</div>
+				
+								<div class="article_title">
+									<h3><%-	 post.title.rendered %></h3>	
+								</div>
+				
+								<div class="article_details">
+									<span>
+										<i><%-post.yoast_head_json.twitter_misc["Geschatte leestijd"]  %></i>
+									</span>
+				
+									<span><%- post.date %></span>						
+								</div>
+							</a>
+						</li>
+					<% }) %>
+				</ul>
+			
+			</article>
+
+
+		<%	}) %>
+
+
+		
+	</div>
+</main>
+
+
+
+
+
+
+<%- include('./partials/foot'); -%>

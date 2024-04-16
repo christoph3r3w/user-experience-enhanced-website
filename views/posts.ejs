@@ -1,0 +1,62 @@
+<%- include('./partials/head', {head: '', title: post.title.rendered}); -%>
+<link rel="stylesheet" href="/styles/post.css" type="text/css">
+
+</head>
+
+
+<body>
+
+
+<%- include('./partials/header', {header: ''}); -%>
+
+<main class="post_article" >
+	<br>
+	<section class="intro_titles">
+		
+		<div class="intro_landmark">
+			<h1><%- post.title.rendered %></h1>
+
+			<img decoding="async" src="<%= post.yoast_head_json.og_image[0].url %>" alt="" width="">
+
+			<!-- aside content -->
+			<aside class="intro_info">
+				<ul>
+					<br>
+					<li>
+						<p>author</p>
+						
+						<!-- <a href="<%= post.yoast_head_json.schema["@graph"][6].url %>"><strong><%= post.yoast_head_json.schema["@graph"][6].name %></strong></a> -->
+						<a href="/author/<%= post.author %>"><strong><%= post.yoast_head_json.schema["@graph"][6].name %></strong></a>
+					</li>
+					<br>
+					<li>
+						<p>leestijd</p>
+						<strong><%= post.yoast_head_json.twitter_misc["Geschatte leestijd"] %></strong>
+					</li>
+				</ul>
+
+			</aside>
+			<aside></aside>
+		</div>
+	</section>
+	<br>
+	<br>
+	<!-- article inleiding -->
+	<section class="inleiding_section">
+		<div class="inleiding_recenties">
+			<a href=""></a>
+			<p>Aantal keer gelezen: <%= locals.pageViews[post.id] %></p>
+		</div>
+		<div class="inleiding_text">
+			<h3><%- post.excerpt.rendered %></h2>
+		</div>
+	</section>
+	<br>
+	<br>
+	<!-- article content -->
+	<section class="post_article_content">
+		<article><%- post.content.rendered %></article>
+	</section>
+</main>
+
+<%- include('./partials/foot'); -%>

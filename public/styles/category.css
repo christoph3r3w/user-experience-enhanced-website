@@ -1,0 +1,53 @@
+*,
+*::before,
+*::after,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  appearance: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
+
+:root{
+
+	--e-global-color-primary: #000000;
+    --e-global-color-secondary: #747474;
+    --e-global-color-text: #7A7A7A;
+    --e-global-color-accent: #E85340;
+    --e-global-color-c6c7b91: #FFFFFF;
+    --e-global-color-3ba099d: #F7F7F5;
+    --e-global-color-7040f87: #F9CDC8;
+    --e-global-color-eed1383: #E6E6E6;
+    --e-global-color-3944fa7: #CECECE;
+    --e-global-color-782b16e: #AEAEAE;
+    --e-global-color-b75eea7: #E5CC32;
+    --e-global-color-5d160b2: #000000B5;
+    --e-global-color-aace5e4: #EBEBEB;
+}
+
+body {
+    background-color: var(--B-white);
+    color: var(--B-black);
+    display: grid;
+    grid-template-columns:
+	[full-start]
+    minmax(2rem, auto)
+    [ct-start]
+    repeat(6, 1fr)
+    [ct-end]
+    minmax(2rem, auto)
+	[full-end];
+    grid-template-rows: min-content;
+	scrollbar-gutter: stable;
+	height: auto;
+  
+	background-color: rgba(231, 222, 210, 0.485);
+	background-color: var(--e-global-color-c6c7b91);	
+}
+
+
+
+/* footer */
