@@ -1,16 +1,7 @@
 
 
 # Redpers
-<!-- Geef je project een titel en schrijf in één zin wat het is -->
-
-## Inhoudsopgave
-
-  * [Beschrijving](#beschrijving)
-  * [Gebruik](#gebruik)
-  * [Kenmerken](#kenmerken)
-  * [Installatie](#installatie)
-  * [Bronnen](#bronnen)
-  * [Licentie](#licentie)
+![Screenshot 2024-04-19 001126](https://github.com/christoph3r3w/user-experience-enhanced-website/assets/144007933/8b3d02c2-01bd-49cb-88ca-08e5860bd4d2)
 
 ## Beschrijving
 <!-- Bij Beschrijving staat kort beschreven wat voor project het is en wat je hebt gemaakt -->
@@ -18,8 +9,7 @@
 <!-- Voeg een link toe naar Github Pages 🌐-->
 
 ## Gebruik
-<!-- Bij Gebruik staat de user story, hoe het werkt en wat je er mee kan. -->
-
+The main user story for this project > https://github.com/fdnd-agency/red-pers/issues/9
 
 ## Installatie
 1. fork the repository to your local environment
