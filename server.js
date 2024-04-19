@@ -144,8 +144,11 @@ app.locals.hardcodedCategories = {
 	});
   
   })
+	const categoriesUrl = `${apiUrl}/categories?per_page=100`;
+		fetchJson(`${directus_url}?filter[id][_eq]=${request.params.id}`),
 
   app.get('/author/:id',function(req,res){
+				direct: directusData.data.length ? directusData.data[0] : false
 	// the data i need for this page
 	const postsUrl = `${apiUrl}/posts?author=${req.params.id}`;
 	const usersUrl = `${apiUrl}/users?include=${req.params.id}`;
