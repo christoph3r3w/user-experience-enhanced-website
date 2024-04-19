@@ -562,6 +562,122 @@ footer{
 
 
 
+		ul:has(.barX){
+			/* outline: solid green; */
+			flex-direction: column;
+			height: 70dvh;
+			gap:5rem;
+			margin-top: 3rem;
+			padding:1%;
+			/* padding-top: 6rem; */
+			padding-bottom: 3rem;
+			overflow-y: scroll;
+			scroll-snap-type:  block mandatory;
+			flex-wrap: nowrap;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+			&:has(:hover) ::-webkit-scrollbar {
+				display: contents;
+			}
+
+			li{
+				/* outline: solid; */
+				display: flex;
+				flex-direction: row;
+				height: 55dvh;
+				scroll-snap-align:  center;
+				width:unset ;
+
+				
+				/* all the sections of the latest article */
+				>div{
+					flex:0 1 23% ;
+					display: block;
+				}
+
+				/* article link */
+				.article_wrapper .article_details{
+					display: none;
+				}
+
+				.article_wrapper .article_title{
+					flex: 0 1 20%;
+				}
+
+				.article_wrapper .img_wrapper{
+					/* height: 100%; */
+					flex: 1 0 80% ;
+				}
+				
+				.content1{
+					/* background-color: aliceblue; */
+					flex: 1 0 70%  ;
+					/* outline: solid; */
+				}
+				.content2{
+					/* background-color:bisque; */
+					position: relative;
+					/* place-content: center; */
+					
+				}
+				.content3{
+					/* background-color:steelblue; */
+					position: relative;
+					/* place-content: center; */
+					
+				}
+			}
+	
+			.con-circle{
+				display: flex;
+				flex-direction: row;
+				min-height:2rem;
+				width: auto;
+				/* width: fit-content; */
+				/* margin-bottom: 9%; */
+				position: sticky;
+				top: 77%;
+				/* outline: solid; */
+				/* bottom: 30%; */
+				/* inset-inline: 30%; */
+	
+				span{
+					flex:0 1 100%;
+					/* outline: solid; */
+					/* width: 100%; */
+					&:nth-of-type(1){
+						translate: 30% 0;
+					z-index: 4;
+					}
+					&:nth-of-type(2){
+						z-index: 3;
+					}
+					&:nth-of-type(3){
+						translate: -30% 0;
+						z-index: 2;
+					}
+				}
+			}
+	
+			.circle{
+				width:100%;
+			  /*   height:100%; */
+			  /*   outline:solid red; */
+				aspect-ratio:1;
+				background-color:var(--e-global-color-accent);
+				clip-path: circle(50%);
+				shape-outside: circle(50%);
+				  display:grid;
+				  place-content:center;
+							  
+			}
+		}
+		
+	}
+
+
 	/* footer {
 	} */
 }
