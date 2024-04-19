@@ -30,7 +30,7 @@ html {
 }
 
 body {
-    background-color: var(--B-white);
+    /* background-color: var(--B-white); */
     color: var(--B-black);
     display: grid;
     grid-template-columns:
@@ -45,8 +45,8 @@ body {
 	scrollbar-gutter: stable;
 	height: auto;
   
-	background-color: rgba(231, 222, 210, 0.485);
-	background-color: var(--e-global-color-c6c7b91);	
+	/* background-color: rgba(231, 222, 210, 0.485); */
+	/* background-color: var(--e-global-color-c6c7b91);	 */
 }
 
 .homepage_posts{
@@ -76,7 +76,7 @@ body {
 /* the style of the wrappers */
 .article_wrapper{
 	outline: 1px solid;
-	background-color: var(--e-global-color-3ba099d);
+	/* background-color: var(--e-global-color-3ba099d); */
 	width: 100%;
 	position: relative;
 
@@ -558,6 +558,7 @@ footer{
 
 	}
 
+	.homepage_posts{ 
 	
 
 
@@ -723,7 +724,7 @@ footer{
 	}
 
 	main{
-		background-color: var(--e-global-color-c6c7b91);
+		/* background-color: var(--e-global-color-c6c7b91); */
 	}
 
 }
