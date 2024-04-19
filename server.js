@@ -210,15 +210,34 @@ app.locals.hardcodedCategories = {
 	  })
 	})
   
+// share route
+app.post("/post/:id/share", (request,response) => {
 	
-  
-	// Handle error if fetching data fails
-	.catch((error) => {
-	  console.error('Error fetching data:', error);
-	  res.status(500).send('Error fetching data');
-	});
-  
-  })
+	if (request.body.enhanced) {
+		console.log(request.body),
+		response.render(`/posts/${request.params.id}`)
+	} else {
+		fetchJson(`${directus_url}?filter[id][_eq]=${request.params.id}`).then(
+			({ data }) => {
+
+				// console.log(data[0].shares);
+				// console.log(data);
+				// Doe een PATCH op directus, stuur de id mee als die er is.
+				fetchJson(`${directus_url}/${data[0]?.id ? data[0].id : ""}`, {
+					method: data[0]?.id ? "PATCH" : "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						id: request.params.id,
+						shares: data.length > 0 ? data[0].shares + 1 : 1,
+					}),
+				}).then((result) => {
+					console.log(result);
+				});
+			}
+		);
+		response.redirect(301,`/posts/${request.params.id}`);
+	}
+});
 
   app.post('/posts/:id', function (request, response) {
 	// Er is nog geen afhandeling van POST, redirect naar GET op /
