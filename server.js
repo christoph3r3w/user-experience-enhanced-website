@@ -259,10 +259,36 @@ app.post("/post/:id/share", (request,response) => {
 	//     response.redirect(303, '/detail/' + request.params.id)
 	//   })
 	// })
+// like form route
+app.post("/post/:id/likes", (request,response) => {
+
+	if (request.body.enhanced) {
+		console.log(request.body),
+		response.render(`/posts/${request.params.id}`)
+	} else {
+		
+		fetchJson(`${directus_url}?filter[id][_eq]=${request.params.id}`).then(
+			({ data }) => {
+
+				// console.log(data[0].likes);
+				// console.log(data);
+				// Doe een PATCH op directus, stuur de id mee als die er is.
+				fetchJson(`${directus_url}/${data[0]?.id ? data[0].id : ""}`, {
+					method: data[0]?.id ? "PATCH" : "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						id: request.params.id,
+						likes: data.length > 0 ? data[0].likes + 1 : 1,
+					}),
+				}).then((result) => {
+					console.log(result);
+				});
+			}
+		);
+		response.redirect(301, `/posts/${request.params.id}`);
+
 	
-  
-	response.redirect(303, '/');
-  });
+}});
 
   // Stel het poortnummer in waar express op moet gaan luisteren
 app.set('port', process.env.PORT || 8006)
