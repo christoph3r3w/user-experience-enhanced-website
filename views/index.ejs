@@ -18,7 +18,13 @@
 					<a href="/posts/<%= post.id %>">
 
 						<div class="img_wrapper">
-							<img decoding="async" src="<%= post.yoast_head_json.og_image[0].url %>" width="""">
+							<img 
+							decoding="async" 
+							loading="lazy"
+							src="<%= post.yoast_head_json.og_image[0].url %>" 
+							width="<%= post.yoast_head_json.og_image[0].width %>"
+							height="<%= post.yoast_head_json.og_image[0].height %>"
+							>
 						</div>
 	
 						<div class="article_title">
@@ -103,7 +109,13 @@
 							<a href="/posts/<%= post.id %>">
 
 								<div class="img_wrapper">
-									<img decoding="async" width="" src="<%= post.yoast_head_json.og_image[0].url %>" >
+									<img 
+									decoding="async" 
+									loading="lazy"
+									src="<%= post.yoast_head_json.og_image[0].url %>" 
+									width="<%= post.yoast_head_json.og_image[0].width %>"
+									height="<%= post.yoast_head_json.og_image[0].height %>"
+									>
 								</div>
 				
 								<div class="article_title">

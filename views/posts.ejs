@@ -16,8 +16,13 @@
 		<div class="intro_landmark">
 			<h1><%- post.title.rendered %></h1>
 
-			<img decoding="async" src="<%= post.yoast_head_json.og_image[0].url %>" alt="" width="">
-
+			<img 
+			decoding="async" 
+			loading="lazy"
+			src="<%= post.yoast_head_json.og_image[0].url %>" 
+			width="<%= post.yoast_head_json.og_image[0].width %>"
+			height="<%= post.yoast_head_json.og_image[0].height %>"
+			>
 			<!-- aside content -->
 			<aside class="intro_info">
 				<ul>
