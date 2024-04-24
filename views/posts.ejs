@@ -7,7 +7,7 @@
 <body>
 
 
-<%- include('./partials/header', {header: ''}); -%>
+<%- include('./partials/header', {header: '', img_src: post.yoast_head_json.og_image[0].url}); -%>
 
 <main class="post_article" >
 	<br>
@@ -18,7 +18,6 @@
 
 			<img 
 			decoding="async" 
-			loading="lazy"
 			src="<%= post.yoast_head_json.og_image[0].url %>" 
 			width="<%= post.yoast_head_json.og_image[0].width %>"
 			height="<%= post.yoast_head_json.og_image[0].height %>"
@@ -53,6 +52,7 @@
 				<p>Aantal keer gelezen: <%= locals.pageViews[post.id] %></p>
 			</span>
 
+			
 			<%- include('./partials/share') %>
 
 			<%- include('./partials/like') %>
