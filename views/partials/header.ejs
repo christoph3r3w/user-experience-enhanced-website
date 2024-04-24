@@ -23,7 +23,7 @@
 		<div class="h-main-logo">
 			<a href="/">
 				<img width="100" src="https://redpers.nl/wp-content/uploads/2023/05/RedPers_Logo_Cmyk_Black.png" class="attachment-full size-full wp-image-101131" alt="" srcset="https://redpers.nl/wp-content/uploads/2023/05/RedPers_Logo_Cmyk_Black.png 1920w, https://redpers.nl/wp-content/uploads/2023/05/RedPers_Logo_Cmyk_Black-300x72.png 300w, https://redpers.nl/wp-content/uploads/2023/05/RedPers_Logo_Cmyk_Black-1024x246.png 1024w, https://redpers.nl/wp-content/uploads/2023/05/RedPers_Logo_Cmyk_Black-768x184.png 768w, https://redpers.nl/wp-content/uploads/2023/05/RedPers_Logo_Cmyk_Black-1536x369.png 1536w" sizes="(max-width: 1920px) 100vw, 1920px">		
-			
+		
 			</a>
 		</div>
 
@@ -75,10 +75,21 @@
 	</nav>
 
 	<div class="header-background-shape">
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" >
+		
+		
+
+		<% if (img_src.length > 0) { %>
+			<img src="<%- img_src %>" alt="" width="360" fetchpriority="high">
+		<%  } else { %>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" >
 			<path fill="" class="elementor-shape-fill" d="M1000,4.3V0H0v4.3C0.9,23.1,126.7,99.2,500,100S1000,22.7,1000,4.3z"></path>
+			
 		</svg>	
+		<% } %>
+
+		
 	</div>
+	
 
 </header>
 
