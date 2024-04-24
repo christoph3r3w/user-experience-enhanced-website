@@ -4,6 +4,7 @@ const menu_exit = document.querySelector(".menu_exit");
 const sidebar = document.getElementById("sidebar");
 const appear = document.querySelector(".appear");
 
+
 // forms
 let forms = document.querySelectorAll('form');
 const formBTN = document.querySelectorAll('button[type="submit"]');
@@ -25,11 +26,13 @@ menu_exit.addEventListener('click',(e)=>{
 if(formBTN){
 	forms.forEach(form =>{
 		form.addEventListener('submit', function(e){
-	
 
+
+			let form = this;
 			let data = new FormData(this)
 			// console.log(data,"and",this)
 			data.append('enhanced', true)
+
 			
 
 			fetch(this.action,{
@@ -37,13 +40,21 @@ if(formBTN){
 				method: this.method,
 				
 			})
-			.then(function(response){
-				return response.text()
-				// ,
-				console.log('[3]',response.text());
-			}).catch(error => {
-                console.error('Error occurred:', error);
-            });
+			.then(function(rawStream){
+				return rawStream.text()
+				// loading state
+				
+				// console.log('[3]',response.text());
+			}).then(function(text) {
+				// console.log(text)
+				// Een eventuele loading state haal je hier ook weer weg
+				form.innerHTML = text
+	
+			}).catch((x) => {
+				// Handle error if fetching data fails
+				// console.error("Error fetching data cleint-side:", error);
+				alert('something went wrong',x)
+			});
 
 			e.preventDefault()
 
