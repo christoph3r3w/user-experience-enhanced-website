@@ -56,7 +56,7 @@ body {
 	
 }
 
-/* top articles section */
+/*  articles section */
 .article_list{
 	grid-column: 1/-1;
 	grid-row: 1;
@@ -87,7 +87,7 @@ body {
 		position: relative;
 		height: 50dvh;
 		width: auto !important;
-
+		
 		:nth-child(n){
 			z-index: 2;
 		}
