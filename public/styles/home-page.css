@@ -637,8 +637,15 @@ footer{
 			}
 
 			.article_excerpt{
-				padding-inline: 10%;
-				font-size: 1.4rem;
+				padding: 10%;
+				margin-inline: 5%;
+				font-size: clamp(0.5rem, -0.125rem + 2vw, 1.1rem);
+				outline: 1px solid;
+				/* border-radius: 2rem; */
+				overflow: hidden;
+				backdrop-filter: blur(5px);
+				height: 40vh ;
+
 			}
 	
 			.con-circle{
