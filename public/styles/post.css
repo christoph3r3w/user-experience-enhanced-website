@@ -36,9 +36,9 @@ body::after{
 header{
 	
 	.header-main,.header-menu-bar{
-		backdrop-filter: blur(10px);	
-		position: sticky;
-		top: 0;
+		/* backdrop-filter: blur(10px);	 */
+		/* position: sticky;
+		top: 0; */
 		.header-menu-bar{
 			margin-bottom: 20px;
 		}
@@ -48,6 +48,7 @@ header{
 	.header-background-shape{
 		svg{
 			display: block;
+			z-index: -2;
 		}
 		img{
 			/* z-index: 90; */
@@ -58,7 +59,7 @@ header{
 			height: 70dvh;
 			object-position: center;
 			object-fit: cover;
-			opacity: 0.5;
+			opacity: 0.3;
 			clip-path: ellipse(100% 50% at 51% 40%);
 			display: none;
 
@@ -78,7 +79,7 @@ header{
 /* article post */
 .post_article{
 
-	--title-margin: 25%;
+	--title-margin: 20%;
 	grid-column: 1/-1;
 	margin-top: var(--title-margin);
 
@@ -372,7 +373,7 @@ footer{
 	header{
 		grid-template-rows:[up-start] 1fr [up-end down-start] min-content [down-end] ;
 		border-bottom: none;
-
+		margin-bottom: 10dvh;
 		/* background-color: #E5CC32; */
 		.header-main{
 			grid-row: up;
@@ -397,6 +398,7 @@ footer{
 				height: min-content;
 				justify-content: space-around;
 				gap: 3%;
+				
 				svg{display: none;}
 			}
 		}
@@ -409,6 +411,7 @@ footer{
 					width: calc(280% + 1.3px);
 					outline: solid blue !important;
 					display: none;
+					
 				}
 
 				img{
@@ -418,14 +421,81 @@ footer{
 	}
 
 	.post_article{
-
+		/* background-color: #E5CC32; */
 		.intro_landmark{
-			display: none;
+			border: none;
+			height: min-content;
+			/* outline: solid; */
+			/* display: none; */
+			/* mix-blend-mode: multiply; */
+			h1{
+				/* outline: solid; */
+				text-align: center;
+				font-size: clamp(2rem, 0.75rem + 4vw, 3rem);
+				height: max-content;
+				
+			}
+
+			img{display: none;}
+
+			aside{
+				background-color:  red;
+				display: none;
+			}
+
 		}
 
-		.intro_titles{
+		.inleiding_section{
+			display: grid;
+			grid-template-columns: subgrid;
+			grid-template-rows: 1fr;
+			margin-top: 10dvh;
+			.inleiding_recenties{
+				display: flex;
+				flex-direction: row;
+				order: 2;
+				/* outline: #E5CC32 solid; */
+				gap: 1rem;
 
+				.seen{
+					display: flex;
+					flex-direction: row;
+					height: fit-content;
+					
+					span{display: flex;align-items: center;}
+				}
+
+				> form{
+					height: fit-content;
+					button{
+						display: flex;
+						flex-direction: row;
+						gap: 2%;
+						width: fit-content;
+						align-items: center;
+						border: none;
+						background:none ;
+					}
+					p{
+						display: flex;
+						flex-direction: row;
+						gap: 2%;
+						width: fit-content;
+
+					}
+				}
+			}
+
+			.inleiding_text{
+				/* outline: solid; */
+				grid-column: 2/ span 8;
+				
+			}
 		}
+
+
+
+
 	}
 
 
@@ -441,7 +511,7 @@ footer{
   
 @media (min-width: 1200px) {
 	body {
-	  /* background-color: var(--P-yellow); */
+	  background-color: var(--P-yellow);
 	  grid-template-columns:
 		minmax(0px, auto)
 		[ct-start]
@@ -460,7 +530,7 @@ footer{
 		
 		grid-template-rows:[up-start] min-content [up-end mid-start] 1fr [mid-end down-start] min-content [down-end] ;
 		border-bottom: none;
-
+		margin-bottom: 0 ;
 		.header-blackbar{
 			grid-row: up;
 		}
@@ -556,6 +626,20 @@ footer{
 
 	}
 
+	.post_article{
+		--title-margin: 5%;
+		
+		.intro_landmark{
+			/* display: none; */
+			margin-bottom: 0dvi;
+			display: block;
+		}
+
+		.inleiding_section{
+			background-color: #41e532;
+			margin-top: 0;
+		}
+	}
 	
 
 
@@ -607,6 +691,15 @@ footer{
 	main{
 		/* background-color: var(--e-global-color-c6c7b91); */
 		z-index: 0;
+	}
+
+	.post_article{
+		
+		.intro_landmark{}
+
+		.inleiding_section{
+			background-color: #E5CC32;
+		}
 	}
 
 }
