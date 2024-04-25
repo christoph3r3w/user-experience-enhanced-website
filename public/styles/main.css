@@ -43,7 +43,7 @@ body {
     grid-template-rows: min-content;
 	scrollbar-gutter: stable;
 	height: auto;
-  
+	position: relative;
 	background-color: rgba(231, 222, 210, 0.485);
 	background-color: var(--e-global-color-c6c7b91);	
 }
@@ -58,7 +58,10 @@ header{
 	grid-template-rows: 1fr;
 	width: 100%;
 	border-bottom: 1px solid;
-	
+	/* position: sticky;
+	top:0; */
+	/* background: linear-gradient(180deg, rgba(231, 222, 210, 0.584) 40%, rgba(255,255,255,0.05) 96%); */
+
 
 
 	a{
@@ -118,17 +121,20 @@ header{
     	width: 100%;
     	line-height: 0;
 		z-index: -2;
+
 		/* outline: solid blue; */
 		svg{
 			width: calc(250% + 1.3px);
 			/* width: 100%; */
 			display: block;
-			position: relative;
+			position: sticky;
 			left: 50%;
 			transform: translateX(-50%);
 			height: 650px;
 			transition: 1s;
 			transition-property: transform,height;
+			/* background: linear-gradient(180deg, rgba(231, 222, 210, 0.584) 60%, rgba(255,255,255,0.1) 96%); */
+
 			z-index: -2;
 			>path{
 				fill: rgba(231, 222, 210, 0.485);
@@ -280,6 +286,16 @@ footer{
 	header{
 		grid-template-rows:[up-start] 1fr [up-end down-start] min-content [down-end] ;
 		border-bottom: none;
+		position: relative;
+		&::after{
+			content: '';
+			position: absolute;
+			inset: 0;
+			backdrop-filter: blur(4px);	
+			z-index: -1;
+
+		}
+
 
 		/* background-color: #E5CC32; */
 		.header-main{

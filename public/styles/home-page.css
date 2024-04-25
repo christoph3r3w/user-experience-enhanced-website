@@ -206,6 +206,7 @@ body {
 .supporters-donation{
 	grid-column: 1/-1;
 	grid-row: 2;
+	z-index: 0;
 	background-color: #FAC232;
 	margin-block: 5%;
 	padding-block: 5%;
@@ -273,6 +274,7 @@ body {
 	grid-row: 3;
 	display: flex;
 	flex-direction: column;
+	z-index: 1;
 }
 
 .categories article{
@@ -288,11 +290,14 @@ body {
 
 .categories article h2{
 	margin-bottom: 2rem;
-	color: var(--e-global-color-c6c7b91);
 	background-color: var(--e-global-color-primary);
 	width: fit-content;
 	padding-inline: 3%;
 	text-transform: capitalize;
+	a{
+		color: var(--e-global-color-c6c7b91);
+		line-height: 1.2;
+	}
 }
 
 
@@ -629,6 +634,11 @@ footer{
 					/* place-content: center; */
 					
 				}
+			}
+
+			.article_excerpt{
+				padding-inline: 10%;
+				font-size: 1.4rem;
 			}
 	
 			.con-circle{
