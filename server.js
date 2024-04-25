@@ -31,7 +31,7 @@ app.locals.pageViews = {};
 app.locals.hardcodedCategories = {
 	binnenland: 9,
 	buitenland: 1010,
-	columns: 7164,
+	column: 7164,
 	economie: 6,
 	"kunst-media": 4,
 	podcast: 3211,
@@ -196,7 +196,7 @@ app.get("/posts/:id", function (request, response) {
 				categories: categoryData,
 				direct: directusData.data.length ? directusData.data[0] : false
 			});
-			response.render("header.ejs",{post: postData})
+			// response.render("header.ejs",{post: postData})
 
 			console.log("post succes");
 		})
@@ -305,7 +305,7 @@ app.post("/post/:id/share", (request,res) => {
 				// console.log(result);
 
 				if (request.body.enhanced) {
-					// console.log('[_____________________1__________________]',response),
+					console.log('[________________shared__________________]'),
 					res.render(`./partials/share.ejs`, {
 						post: {id: request.params.id},
 						direct: {shares: newShares}
@@ -356,10 +356,11 @@ app.post("/post/:id/likes", (request,res) => {
 
 					// if the html body went through the cleint-side code it will gain a enhanced tag.
 					if (request.body.enhanced) {
-						// console.log('[______________________2_________________]',res),
+						console.log('[_________________liked_________________]',),
 						res.render(`./partials/like.ejs`, {
 							post: {id:request.params.id},
 							direct: {likes:newLikes}
+							
 						})
 					} else {
 						res.redirect(301, `/posts/${request.params.id}`);
