@@ -66,7 +66,7 @@ In de bouwfase realiseer je de beslissingen uit de ontwerpfase.
  
 #### Node & Express (server.js)
 - Volgorde van routes is hetzelfde als de sitemap
-- GET & POST routes staan bij elkaar
+- GET & POST routes van dezelfde route staan bij elkaar
 
 #### HTML (EJS)
 - Volgorde van de HTML elementen is hetzelfde als de pagina structuur
