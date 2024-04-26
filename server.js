@@ -39,7 +39,7 @@ app.locals.hardcodedCategories = {
 	wetenschap: 94,
 };
 
-app.get("/", function(request, response) {
+app.get("/", function (request, response) {
 	// Haal alle personen uit de WHOIS API op
 	const postsUrl = `${apiUrl}/posts?per_page=50`;
 	const usersUrl = `${apiUrl}/users`;
@@ -154,8 +154,6 @@ app.get("/", function(request, response) {
 		});
 });
 
-
-  
 // individual article routes (posts)
 app.get("/posts/:id", function (request, response) {
 	// Fetch the post with the given id from the API
@@ -194,7 +192,7 @@ app.get("/posts/:id", function (request, response) {
 			response.render("posts.ejs", {
 				post: postData,
 				categories: categoryData,
-				direct: directusData.data.length ? directusData.data[0] : false
+				direct: directusData.data.length ? directusData.data[0] : false,
 			});
 			// response.render("header.ejs",{post: postData})
 
@@ -275,24 +273,16 @@ app.get("/categories/:slug", function (req, res) {
 		});
 });
 
-
-
-
-
-
-
 // share route
-app.post("/post/:id/share", (request,res) => {
-
+app.post("/post/:id/share", (request, res) => {
 	fetchJson(`${directus_url}?filter[id][_eq]=${request.params.id}`).then(
 		({ data }) => {
-
 			// console.log(data[0].shares);
 			// console.log(data);
-			// 
+			//
 			//variable that counts shares
 			let newShares = data.length > 0 ? data[0].shares + 1 : 1;
-			
+
 			// Doe een PATCH op directus, stuur de id mee als die er is.
 			fetchJson(`${directus_url}/${data[0]?.id ? data[0].id : ""}`, {
 				method: data[0]?.id ? "PATCH" : "POST",
@@ -305,29 +295,23 @@ app.post("/post/:id/share", (request,res) => {
 				// console.log(result);
 
 				if (request.body.enhanced) {
-					console.log('[________________shared__________________]'),
-					res.render(`./partials/share.ejs`, {
-						post: {id: request.params.id},
-						direct: {shares: newShares}
-					})
+					console.log("[________________shared__________________]"),
+						res.render(`./partials/share.ejs`, {
+							post: { id: request.params.id },
+							direct: { shares: newShares },
+						});
 				} else {
-					
-					res.redirect(301,`/posts/${request.params.id}`);
+					res.redirect(301, `/posts/${request.params.id}`);
 				}
 			});
 		}
 	);
-
-
 });
 
-
 // share like
-app.post("/post/:id/likes", (request,res) => {
-
+app.post("/post/:id/likes", (request, res) => {
 	fetchJson(`${directus_url}?filter[id][_eq]=${request.params.id}`).then(
 		({ data }) => {
-			
 			// console.log(data[0].likes);
 			// console.log(data);
 			//variable that counts shares
@@ -341,38 +325,34 @@ app.post("/post/:id/likes", (request,res) => {
 			// 	newLikes = data[0].likes - 1;
 			// }
 
-			let newLikes = data.length === 0 ? 1 : data[0].likes >= 1 ? 0 : data[0].likes + 1;
+			let newLikes =
+				data.length === 0 ? 1 : data[0].likes >= 1 ? 0 : data[0].likes + 1;
 
-				// Doe een PATCH op directus, stuur de id mee als die er is.
-				fetchJson(`${directus_url}/${data[0]?.id ? data[0].id : ""}`, {
-					method: data[0]?.id ? "PATCH" : "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						id: request.params.id,
-						likes: newLikes,
-					}),
-				}).then((result) => {
-					// console.log(result);
+			// Doe een PATCH op directus, stuur de id mee als die er is.
+			fetchJson(`${directus_url}/${data[0]?.id ? data[0].id : ""}`, {
+				method: data[0]?.id ? "PATCH" : "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					id: request.params.id,
+					likes: newLikes,
+				}),
+			}).then((result) => {
+				// console.log(result);
 
-					// if the html body went through the cleint-side code it will gain a enhanced tag.
-					if (request.body.enhanced) {
-						console.log('[_________________liked_________________]',),
+				// if the html body went through the cleint-side code it will gain a enhanced tag.
+				if (request.body.enhanced) {
+					console.log("[_________________liked_________________]"),
 						res.render(`./partials/like.ejs`, {
-							post: {id:request.params.id},
-							direct: {likes:newLikes}
-							
-						})
-					} else {
-						res.redirect(301, `/posts/${request.params.id}`);
-					}
-				});
-			}
-		);
-
-	
+							post: { id: request.params.id },
+							direct: { likes: newLikes },
+						});
+				} else {
+					res.redirect(301, `/posts/${request.params.id}`);
+				}
+			});
+		}
+	);
 });
-
-
 
 // Stel het poortnummer in waar express op moet gaan luisteren
 app.set("port", process.env.PORT || 8006);
@@ -383,7 +363,6 @@ app.listen(app.get("port"), function () {
 	console.log("Server is running on port 8006");
 	console.log(`Application started on http://localhost:${app.get("port")}`);
 });
-
 
 // app.post('/posts/:id', function (request, response) {
 // 	//  Er is nog geen afhandeling van POST, redirect naar GET op /
