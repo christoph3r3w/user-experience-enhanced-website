@@ -33,6 +33,7 @@ if(formBTN){
 			// console.log(data,"and",this)
 			data.append('enhanced', true)
 
+			// add loader
 			
 
 			fetch(this.action,{
@@ -50,9 +51,9 @@ if(formBTN){
 				// Een eventuele loading state haal je hier ook weer weg
 				form.innerHTML = text
 	
+				// add new sate to buttons 
 			}).catch((x) => {
 				// Handle error if fetching data fails
-				// console.error("Error fetching data cleint-side:", error);
 				alert('something went wrong',x)
 			});
 
