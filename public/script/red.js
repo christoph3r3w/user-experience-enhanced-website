@@ -54,6 +54,19 @@ if (formBTN) {
 					// Een eventuele loading state haal je hier ook weer weg
 					form.innerHTML = text;
 
+					// view transition for form
+					if(!document.startViewTransition){
+						//remove loader
+						form.classList.remove('loader');
+					}else{
+						document.startViewTransition(() => {
+							form.classList.remove('loader');
+
+						})
+					}
+
+					form.innerHTML = text;
+					
 					// add new sate to buttons
 				})
 				.catch((x) => {
