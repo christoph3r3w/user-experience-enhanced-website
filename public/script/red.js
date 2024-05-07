@@ -30,6 +30,7 @@ if (formBTN) {
 			data.append("enhanced", true);
 
 			// add loader
+			this.classList.add('loader');
 
 			fetch(this.action, {
 				body: new URLSearchParams(data),
@@ -38,6 +39,7 @@ if (formBTN) {
 				.then(function (rawStream) {
 					return rawStream.text();
 					// loading state
+					this.classList.remove('loader');
 
 					// console.log('[3]',response.text());
 				})
