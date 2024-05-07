@@ -9,6 +9,11 @@ let forms = document.querySelectorAll("form");
 const formBTN = document.querySelectorAll('button[type="submit"]');
 const testBTN = document.querySelector(".inleiding_text");
 
+// date
+const CT = document.querySelector('.h-main-datum > strong');
+
+
+// sidebar 
 menuBtn.addEventListener("click", function (e) {
 	sidebar.classList.add(appear);
 	console.log("went in");
@@ -21,6 +26,7 @@ menu_exit.addEventListener("click", (e) => {
 	console.log(e);
 });
 
+//forms
 if (formBTN) {
 	forms.forEach((form) => {
 		form.addEventListener("submit", function (e) {
@@ -54,6 +60,8 @@ if (formBTN) {
 					// Handle error if fetching data fails
 					alert("something went wrong", x);
 				});
+
+				
 
 			e.preventDefault();
 		});

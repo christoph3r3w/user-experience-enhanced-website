@@ -33,6 +33,7 @@ body::after{
 @keyframes scroll {
 	to{scale: 1 1;}
 }
+
 header{
 	
 	.header-main,.header-menu-bar{
@@ -66,22 +67,23 @@ header{
 		}
 	}
 }
-.post_article{
-	grid-column: ct;
-	display: grid;
-	grid-template-columns: subgrid;
-
-	:is(.intro_titles,.inleiding_section, .post_article_content){
-		grid-column: ct;
-	}
-}
 
 /* article post */
 .post_article{
 
+	grid-column: ct;
+	display: grid;
+	grid-template-columns: subgrid;
+
+
 	--title-margin: 20%;
 	grid-column: 1/-1;
 	margin-top: var(--title-margin);
+
+
+	:is(.intro_titles,.inleiding_section, .post_article_content){
+		grid-column: ct;
+	}
 
 	.intro_titles{
 		grid-column: ct;
