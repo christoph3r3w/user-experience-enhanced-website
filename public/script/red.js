@@ -83,3 +83,33 @@ if (formBTN) {
 		console.log(forms);
 	});
 }
+
+// console.log("start");
+
+
+function header_date() {
+
+    const now = new Date();
+
+    const T_hour = String(now.getHours()).padStart(2, '0');
+    const T_minute = String(now.getMinutes()).padStart(2, '0'); 
+
+    const T_day = String(now.getDay()).padStart(2, '0'); 
+    const T_month = String(now.getMonth()).padStart(2, '0'); 
+    const T_year = String(now.getFullYear()).padStart(4, '0'); 
+
+    const T_header_day = T_day + T_date + T_month +','+ T_year;
+    CT.innerHTML = T_time;
+}
+
+
+setInterval(taskbar_time, 1000);
+taskbar_time();
+
+
+// console.log("done");
+// console.log(CT);
+
+
+
+
