@@ -50,9 +50,6 @@ if (formBTN) {
 					// console.log('[3]',response.text());
 				})
 				.then(function (text) {
-					// console.log(text)
-					// Een eventuele loading state haal je hier ook weer weg
-					form.innerHTML = text;
 
 					// view transition for form
 					if(!document.startViewTransition){

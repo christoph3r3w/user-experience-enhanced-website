@@ -105,6 +105,8 @@ app.get("/", function (request, response) {
 					name: "Wetenschap",
 					posts: [],
 				},
+
+				
 			];
 			// Render index.ejs and pass the fetched data as 'posts' and 'users' variables
 			// let catA = `${postsData}&categories=${categoryData[0].id}`
@@ -324,6 +326,7 @@ app.post("/post/:id/likes", (request, res) => {
 			// 	// newLikes = 1; // or any default value you prefer
 			// 	newLikes = data[0].likes - 1;
 			// }
+			
 
 			let newLikes =
 				data.length === 0 ? 1 : data[0].likes >= 1 ? 0 : data[0].likes + 1;
