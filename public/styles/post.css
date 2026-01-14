@@ -118,6 +118,7 @@ header{
 			padding: 2%;
 			height: 68%;
 			margin-top: calc(var(--title-margin) * -1 );
+			/* mix-blend-mode: difference; */
 		}
 		aside{
 			grid-column: 2/-1;
@@ -141,7 +142,7 @@ header{
 			p,a,strong{
 				z-index: 2;
 				color: #CECECE;
-				mix-blend-mode: invert;
+				mix-blend-mode: difference;
 			}
 
 		}
@@ -409,8 +410,6 @@ footer{
 		}
 
 		.header-background-shape{
-			
-			
 
 				svg{
 					width: calc(280% + 1.3px);

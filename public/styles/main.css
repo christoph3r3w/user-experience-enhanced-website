@@ -96,6 +96,7 @@ header{
 		display: grid;
 		place-content: center;
 		width: 100%;
+		
 
 		a{
 			place-content: center;
@@ -110,6 +111,10 @@ header{
 
 	:is(.h_main_menu_btn,.h-main-search,.h-main-datum,.h-main-links){
 		place-self: center;
+	}
+
+	.h-main-datum{
+		text-transform: uppercase;
 	}
 
 	/* background circle shape */
@@ -200,7 +205,7 @@ main{
 footer{
 	grid-column: 1/-1;
     grid-row: 3;
-	outline: solid green;
+	outline: solid rgb(128, 124, 0);
 	display: grid;
 	grid-template-columns: subgrid;
 	border-top: solid 1px;
