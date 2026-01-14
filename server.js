@@ -1,17 +1,23 @@
 // Importeer het npm pakket express uit de node_modules map
 import express from "express";
+import { readFile } from 'fs/promises';
+
+
+// Load the Api.json data
 
 // Importeer de zelfgemaakte functie fetchJson uit de ./helpers map
 import fetchJson from "./helpers/fetch-json.js";
 
 // Stel het basis endpoint in
-const apiUrl = "https://redpers.nl/wp-json/wp/v2";
+const apiUrl = process.env.API_URL || "http://localhost:3001/wp-json/wp/v2";
+const data = JSON.parse(await readFile('./API.json', 'utf-8'));
 
 //directus url
 const directus_url = "https://fdnd-agency.directus.app/items/redpers_shares";
 
 // Maak een nieuwe express app aan
 const app = express();
+const PORT = 4000;
 
 // Stel ejs in als template engine
 app.set("view engine", "ejs");
@@ -27,24 +33,25 @@ app.use(express.urlencoded({ extended: true }));
 // keeps stores the page cound
 app.locals.pageViews = {};
 
-// hardcoded categories
+// hardcoded categories for the header
 app.locals.hardcodedCategories = {
-	binnenland: 9,
-	buitenland: 1010,
-	column: 7164,
-	economie: 6,
+	'binnenland': 9,
+	'buitenland': 1010,
+	'column': 7164,
+	'economie': 6,
 	"kunst-media": 4,
-	podcast: 3211,
-	politiek: 63,
-	wetenschap: 94,
+	'podcast': 3211,
+	'politiek': 63,
+	'wetenschap': 94,
+	
 };
 
 app.get("/", function (request, response) {
 	// Haal alle personen uit de WHOIS API op
 	const postsUrl = `${apiUrl}/posts?per_page=50`;
 	const usersUrl = `${apiUrl}/users`;
-	const categoriesUrl = `${apiUrl}/posts?per_page=99&_fields[]=title&_fields[]=categories&_fields[]=id&_fields[]=slug&_fields[]=date&_fields[]=yoast_head_json`;
-	// Foreach categories key, fetch the next URL,
+	// const categoriesUrl = `${apiUrl}/posts?per_page=99&_fields[]=title,categories,id,slug,date,yoast_head_json`;
+	const categoriesUrl = `${apiUrl}/posts?per_page=99&_fields[]=title&_fields[]=categories&_fields[]=id&_fields[]=slug&_fields[]=date&_fields[]=yoast_head_json`;	// Foreach categories key, fetch the next URL,
 	// https://redpers.nl/wp-json/wp/v2/posts?categories=7164&per_page=3
 	// And put the response of that fetch inside categories[...].posts
 	// https://redpers.nl/wp-json/wp/v2/posts?categories=9&per_page=3
@@ -54,8 +61,10 @@ app.get("/", function (request, response) {
 		fetchJson(usersUrl),
 		fetchJson(categoriesUrl),
 	])
-		.then(([postsData, usersData, categoryData]) => {
-			//  hardcoded catefgory data
+		.then(([postsData, usersData, categoryData ]) => {
+			console.log(categoryData.data);
+			
+			//  hardcoded catefgory data for the home page
 			const categories = [
 				{
 					slug: "binnenland",
@@ -105,14 +114,22 @@ app.get("/", function (request, response) {
 					name: "Wetenschap",
 					posts: [],
 				},
+				// {
+				// 	name: "Aa_ Rubrieken",
+				// 	id: 1,
+				// 	slug: "rubriek",
+				// 	posts: [],
+				// },
 
 				
 			];
+
 			// Render index.ejs and pass the fetched data as 'posts' and 'users' variables
 			// let catA = `${postsData}&categories=${categoryData[0].id}`
 			categories.map((cat) => {
 				let count = 0;
-				categoryData.forEach((post) => {
+				// if(categoryData.data != 200) return;
+				categoryData.forEach(post => {
 					if (post.categories.includes(cat.id) && count < 3) {
 						count = count + 1;
 						post.title.rendered = post.title.rendered
@@ -146,7 +163,7 @@ app.get("/", function (request, response) {
 				users: usersData,
 				categories,
 			});
-			console.log("home success");
+			// console.log("home success");
 		})
 
 		.catch((error) => {
@@ -192,8 +209,8 @@ app.get("/posts/:id", function (request, response) {
 
 			// Render post.ejs and pass the fetched data as 'post' variable
 			response.render("posts.ejs", {
-				post: postData,
-				categories: categoryData,
+				post: postData || {},
+				categories: categoryData || {},
 				direct: directusData.data.length ? directusData.data[0] : false,
 			});
 			// response.render("header.ejs",{post: postData})
@@ -225,9 +242,9 @@ app.get("/author/:id", function (req, res) {
 			console.log("author");
 
 			res.render("author.ejs", {
-				posts: postsData,
-				users: usersData[0],
-				categories: categoriesData,
+				posts: postsData || {},
+				users: usersData[0] || {},
+				categories: categoriesData || {},
 			});
 		})
 
@@ -248,7 +265,7 @@ app.get("/categories/:slug", function (req, res) {
 	fetchJson(categoriesUrl)
 		.then((categoriesData) => {
 			fetchJson(
-				`${apiUrl}/posts?per_page=50&categories=${categoriesData[0].id}`
+				`${apiUrl}/posts?per_page=50&categories=${categoriesData[0]?.id}`
 			).then((postsData) => {
 				// console.log("user", usersData, "posts", postsData)
 
@@ -284,7 +301,7 @@ app.post("/post/:id/share", (request, res) => {
 			//
 			//variable that counts shares
 			let newShares = data.length > 0 ? data[0].shares + 1 : 1;
-
+			console.log(data);
 			// Doe een PATCH op directus, stuur de id mee als die er is.
 			fetchJson(`${directus_url}/${data[0]?.id ? data[0].id : ""}`, {
 				method: data[0]?.id ? "PATCH" : "POST",
@@ -299,8 +316,8 @@ app.post("/post/:id/share", (request, res) => {
 				if (request.body.enhanced) {
 					console.log("[________________shared__________________]"),
 						res.render(`./partials/share.ejs`, {
-							post: { id: request.params.id },
-							direct: { shares: newShares },
+							post: { id: request.params.id } || {},
+							direct: { shares: newShares } || {},
 						});
 				} else {
 					res.redirect(301, `/posts/${request.params.id}`);
@@ -346,8 +363,8 @@ app.post("/post/:id/likes", (request, res) => {
 				if (request.body.enhanced) {
 					console.log("[_________________liked_________________]"),
 						res.render(`./partials/like.ejs`, {
-							post: { id: request.params.id },
-							direct: { likes: newLikes },
+							post: { id: request.params.id } || {},
+							direct: { likes: newLikes } || {},
 						});
 				} else {
 					res.redirect(301, `/posts/${request.params.id}`);

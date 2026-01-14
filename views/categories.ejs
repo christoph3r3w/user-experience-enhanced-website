@@ -12,13 +12,10 @@
 	<ul class="latest_articles">
 		<% posts.forEach(function(post) { %>
 			<li>
-				<a href="/posts/<%= post.id %>">
-					<img decoding="async" src="<%= post.yoast_head_json.og_image[0].url %>" alt="" width="">
-					<h3><%- post.title.rendered %></h3>
-					<p><%- post.date %></p>
-				</a>
-				<a href="/author/<%= post.author %>">
-					<p><%- post.yoast_head_json.author %></p>
+				<%- include('./partials/art',{post}) %>
+
+				<a href="/author/<%= post?.author %>">
+					<p><%- post?.yoast_head_json.author %></p>
 				</a>
 			</li>
 		<% }) %>

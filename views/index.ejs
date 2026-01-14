@@ -1,12 +1,11 @@
-<%- include('./partials/head',{title:"RedPers"}); -%>
+<%- include('./partials/head', {head:'', title:"RedPers"}); -%>
 
 </head>
 
 
 <body>
 
-<%- include('./partials/header',{img_src:""}); -%>
-
+<%- include('./partials/header',{header:'',img_src:"" }); -%>
 
 <main class="homepage_posts">
 	<ul class="article_list latest_articles ">
@@ -15,29 +14,36 @@
 			<li class="latest barX" >
 
 				<div class="content1 article_wrapper">
-					<a href="/posts/<%= post.id %>">
+					<a href="/posts/<%= post?.id %>">
 
 						<div class="img_wrapper">
-							<img 
-							decoding="async" 
-							loading="lazy"
-							src="<%= post.yoast_head_json.og_image[0].url %>" 
-							width="<%= post.yoast_head_json.og_image[0].width %>"
-							height="<%= post.yoast_head_json.og_image[0].height %>"
-							>
+
+							<picture>
+								<!-- <source srcset="https://fdnd-agency.directus.app/assets/.webp" type="image/webp"> -->
+								
+							  	<img 
+								  decoding="async" 
+								  loading="lazy"
+								  src="<%= post?.yoast_head_json.og_image[0].url %>" 
+								  srcset=""
+								  width="<%= post?.yoast_head_json.og_image[0].width %>"
+								  height="<%= post?.yoast_head_json.og_image[0].height %>"
+								>
+							  </picture>
+							
 						</div>
 	
 						<div class="article_title">
-							<h3><%- post.title.rendered %></h3>	
+							<h3><%- post?.title.rendered %></h3>	
 							
 						</div>
 	
 						<div class="article_details">
 							<span>
-								<i><%-post.yoast_head_json.twitter_misc["Geschatte leestijd"] %></i>
+								<i><%-post?.yoast_head_json.twitter_misc["Geschatte leestijd"] %></i>
 							</span>
 	
-							<span><%- post.date %></span>						
+							<span><%- post?.date %></span>						
 						</div>
 						
 						
@@ -46,11 +52,11 @@
 				<!-- <div class="content2">2</div> -->
 				<div class="content3">
 					<article class="article_excerpt">
-						<p><%- post.excerpt.rendered %></p>
+						<p><%- post?.excerpt.rendered %></p>
 					</article>
 					<div class="con-circle">
-						<span><i class="circle"><%- post.date %></i></span>
-						<span><i class="circle"><%-post.yoast_head_json.twitter_misc["Geschatte leestijd"] %></i></span>
+						<span><i class="circle"><%- post?.date %></i></span>
+						<span><i class="circle"><%-post?.yoast_head_json.twitter_misc["Geschatte leestijd"] %></i></span>
 						<span><i class="circle">y</i></span>
 					</div>
 				</div>
@@ -103,36 +109,13 @@
 		</article>
 
 		<% categories.forEach((category) => { %>
-			<article id="catgoryID_<%= category.id %>">
-				<h2><a href="/categories/<%= category.name %>"><%= category.name %></a></h2>
+			<article id="catgoryID_<%= category?.id %>">
+				<h2><a href="/categories/<%= category?.name %>"><%= category?.name %></a></h2>
 				<ul class="article_list">
 					<% category.posts.forEach((post) => { %>
 						<li class="cat article_wrapper">
-								
-							<a href="/posts/<%= post.id %>">
 
-								<div class="img_wrapper">
-									<img 
-									decoding="async" 
-									loading="lazy"
-									src="<%= post.yoast_head_json.og_image[0].url %>" 
-									width="<%= post.yoast_head_json.og_image[0].width %>"
-									height="<%= post.yoast_head_json.og_image[0].height %>"
-									>
-								</div>
-				
-								<div class="article_title">
-									<h3><%-	 post.title.rendered %></h3>	
-								</div>
-				
-								<div class="article_details">
-									<span>
-										<i><%-post.yoast_head_json.twitter_misc["Geschatte leestijd"]  %></i>
-									</span>
-				
-									<span><%- post.date %></span>						
-								</div>
-							</a>
+							<%- include('./partials/art',{post}) %>
 						</li>
 					<% }) %>
 				</ul>
